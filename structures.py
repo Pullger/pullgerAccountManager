@@ -1,56 +1,68 @@
 import logging
 from abc import ABC, abstractmethod
-from pullgerAccountManager import exceptions
+from pullgerInternalControl import pIC_pAM
+
 
 class authorizationStrucruABC(ABC):
+    __slots__ = ('_authorizationsServers', '_authorizationType')
+
     @abstractmethod
     def getDomain(self):
         pass
 
-class authorizationsServers():
+
+class AuthorizationsServers:
     __slots__ = ()
 
     @staticmethod
-    def getByNames(rootServerName):
-        if rootServerName.upper() == "LINKEDIN":
-            return authorizationsServers.linkedin()
+    def getByName(inAuthorisationServer:str):
+        if inAuthorisationServer.upper() == "LINKEDIN":
+            return AuthorizationsServers.linkedin()
         else:
-            raise exceptions.structures(
-                f'Unknown authorization server: {rootServerName}',
+            raise pIC_pAM.structures.IncorrectInputData(
+                f'Unknown authorization server: {inAuthorisationServer}',
                 level=40
             )
 
     class linkedin():
         __slots__ = ()
 
-        def __new__(cls):
+        def __str__(self):
+            return 'linkedin'
+
+        def getByName(self, authorizationType):
+            if authorizationType.upper() == "GENERAL":
+                return self.general
+            elif authorizationType.upper() == "SALES":
+                return self.sales
+            else:
+                raise pIC_pAM.structures.IncorrectInputData(
+                    f'Unknown authorization type: {authorizationType}',
+                    level=40
+                )
+            pass
+
+        @classmethod
+        def getDefault(cls):
             return cls.general()
 
-
         class general(authorizationStrucruABC):
-            __slots__ = ('_rootName', '_currentName')
-
             @property
             def fullName(self):
-                return self._rootName + ('' if self._currentName == '' else '_' + self._currentName)
+                return self._authorizationsServers + ('' if self._authorizationType == '' else '_' + self._authorizationType)
 
             def __init__(self):
-                self._rootName = 'linkedin'
-                self._currentName = ''
+                self._authorizationsServers = 'linkedin'
+                self._authorizationType = ''
 
             def __str__(self):
-                return self.fullName
+                return self._authorizationType
 
             def getDomain(self):
-                from pyPullgerDomain.com.linkedin.port import port
+                from pullgerDomain.com.linkedin.port import port
                 return port.Domain
 
         class sales(general):
-            __slots__ = ()
-
             def __init__(self):
                 super().__init__()
-                self._currentName = 'sales'
-                pass
-
-
+                self._authorizationType = 'sales'
