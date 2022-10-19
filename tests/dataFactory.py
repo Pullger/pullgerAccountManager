@@ -11,3 +11,14 @@ def addLinkedinAccount():
     }
 
     pullgerAM_MODEL.Accounts.putAccount(**accauntDICT)
+
+def LinkedInAccount():
+    account = {
+        'login': 'developer.sphere@outlook.com',
+        'password': 'nkValm76Ys8c6SSwk2Ci',
+        'limitPeopleCircle': 15,
+        'limitPeopleMax': 120,
+        'limitCompanyCircle': 20,
+        'limitCompanyMax': 250,
+    }
+    return account

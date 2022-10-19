@@ -1,4 +1,10 @@
-#Version history
+Version history [pullgerAccountManager]
 
-# {0.0.2.0} [pullgerAccountManager]
-# - initialization
+{0.1.1.0} [pullgerAccountManager]
+ - migrate to module pullgerInternalControl from pullgerExceptions
+
+{0.1.0.0} [pullgerAccountManager]
+ - complex update
+
+{0.0.2.0} [pullgerAccountManager]
+ - initialization
