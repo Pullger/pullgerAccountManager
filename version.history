@@ -1,5 +1,9 @@
 Version history [pullgerAccountManager]
 
+{0.1.2.0} [pullgerAccountManager]
+ - made refactor tests structure
+ - bring some sode to PEP8
+
 {0.1.1.0} [pullgerAccountManager]
  - migrate to module pullgerInternalControl from pullgerExceptions
 
