@@ -11,10 +11,10 @@ import logging
 import datetime
 
 
-class Accounts__Manager(models.Manager):
+class AccountsManager(models.Manager):
     pass
 
-    def getAccountList(self):
+    def get_account_list(self):
         return self.all()
 
     def getActualList(self, **kwargs):
@@ -55,7 +55,7 @@ class Accounts(models.Model):
     password = models.CharField(max_length=500, null=False)
     lastAccessMoment = models.DateTimeField(null=True)
 
-    objects = Accounts__Manager()
+    objects = AccountsManager()
 
     def renewAcessMoment(self):
         self.limitLastAccessMoment = datetime.datetime.now()

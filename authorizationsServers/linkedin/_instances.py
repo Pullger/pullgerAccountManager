@@ -6,7 +6,7 @@ class General(_AuthorizationStrucruABC):
         self._authorizationsServers = 'linkedin'
         self._authorizationType = 'general'
 
-    def getDomain(self):
+    def get_domain(self):
         from pullgerDomain.com.linkedin.port import port
         return port.Domain
 
